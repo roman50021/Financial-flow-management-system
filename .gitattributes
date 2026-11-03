@@ -1,0 +1,5 @@
+# Keep text consistent in Git and preserve Windows launcher line endings.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.sh text eol=lf
+gradlew text eol=lf

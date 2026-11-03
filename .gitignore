@@ -1,0 +1,68 @@
+# macOS and editor-local files
+.DS_Store
+._*
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+~$*
+
+# Java, Maven, Gradle and Android build output
+target/
+build/
+out/
+.gradle/
+.kotlin/
+.externalNativeBuild/
+.cxx/
+local.properties
+*.class
+*.apk
+*.aab
+*.dex
+
+# JavaScript dependencies, build output and caches
+node_modules/
+dist/
+.vite/
+.cache/
+coverage/
+*.tsbuildinfo
+
+# Local environment and private configuration (keep shareable examples)
+.env
+.env.*
+!.env.example
+!.env.*.example
+.direnv/
+application-local.yml
+application-local.yaml
+application-local.properties
+application-secrets.yml
+application-secrets.yaml
+application-secrets.properties
+keystore.properties
+signing.properties
+credentials.json
+service-account*.json
+
+# Private keys, signing certificates and database backups
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+*.dump
+*.sql.gz
+/backups/
+postgres-data/
+pgdata/
+
+# Runtime and diagnostic files
+*.log
+*.pid
+*.hprof
+hs_err_pid*
+replay_pid*

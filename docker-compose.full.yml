@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ffms-postgres
+    environment:
+      POSTGRES_DB: financial_flow_db
+      POSTGRES_USER: ffms_user
+      POSTGRES_PASSWORD: ffms_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ffms_user -d financial_flow_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./rest-api
+    container_name: ffms-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/financial_flow_db
+      SPRING_DATASOURCE_USERNAME: ffms_user
+      SPRING_DATASOURCE_PASSWORD: ffms_password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./react-frontend
+      args:
+        VITE_API_URL: http://localhost:8080/api
+    container_name: ffms-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
